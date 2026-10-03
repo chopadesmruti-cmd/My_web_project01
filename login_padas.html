@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Interactive Panda Login</title>
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Ubuntu:500"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    >
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <style>
+
+        /* ================================
+           BASIC RESET
+        ================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background-color: #8cc8a2;
+            font-family: 'Ubuntu', sans-serif;
+
+            /* CENTER EVERYTHING */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+        }
+
+
+        /* ================================
+           MAIN CONTAINER
+        ================================= */
+
+        .container {
+            position: relative;
+
+            width: 360px;
+            height: 520px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        /* ================================
+           LOGIN BOX
+        ================================= */
+
+        .login {
+            height: 220px;
+            width: 280px;
+
+            background-color: white;
+
+            position: absolute;
+
+            top: 220px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            padding: 50px 25px 20px 30px;
+
+            box-sizing: border-box;
+
+            z-index: 1;
+
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+
+        /* ================================
+           INPUTS
+        ================================= */
+
+        input {
+            color: #4d4449;
+
+            width: 180px;
+
+            border: none;
+            outline: none;
+
+            border-bottom: 1px solid #4d4449;
+
+            font-family: 'Ubuntu', sans-serif;
+
+            font-size: 15px;
+
+            padding: 5px;
+        }
+
+        input:focus {
+            border-bottom: 2px solid #8cc8a2;
+        }
+
+
+        /* ================================
+           FONT AWESOME ICONS
+        ================================= */
+
+        .fa {
+            color: #4d4449;
+
+            font-size: 20px;
+
+            outline: none;
+        }
+
+
+        /* ================================
+           LOGIN BUTTON
+        ================================= */
+
+        button {
+            background-color: #8cc8a2;
+
+            outline: none;
+            border: none;
+
+            color: white;
+
+            font-family: 'Ubuntu', sans-serif;
+
+            font-size: 23px;
+
+            text-transform: uppercase;
+
+            padding: 5px 12px;
+
+            position: relative;
+
+            left: 72px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #6eb58b;
+
+            transform: scale(1.05);
+        }
+
+
+        /* ================================
+           PANDA
+        ================================= */
+
+        .panda {
+            position: absolute;
+
+            width: 135px;
+            height: 170px;
+
+            top: 45px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            z-index: 3;
+        }
+
+
+        /* ================================
+           PANDA EARS
+        ================================= */
+
+        .earl,.earr{
+			background-color: #4d4449;
+			height: 40px;
+			width: 45px;
+			border-radius: 43px 43px 0 0;
+		}
+		.earl{
+			transform: rotate(-38deg);
+			-webkit-transform: rotate(-38deg);
+			position: relative;
+			top:31px;
+			right: 2px;
+		}
+		.earr{
+			transform: rotate(38deg);
+			-webkit-transform: rotate(38deg);
+			position: relative;
+			bottom:8px;
+			left:96px;
+		}
+
+        /* ================================
+           PANDA FACE
+        ================================= */
+
+        .face {
+            height: 120px;
+            width: 135px;
+
+            background-color: white;
+
+            border-radius: 120px 120px 90px 90px;
+
+            position: absolute;
+
+            top: 50px;
+
+            z-index: 2;
+        }
+
+
+        /* ================================
+           EYES
+        ================================= */
+
+        .eyel,
+        .eyer {
+            background-color: #4d4449;
+
+            height: 35px;
+            width: 32px;
+
+            border-radius: 32px;
+
+            position: absolute;
+        }
+
+        .eyel {
+            top: 5px;
+            left: 22px;
+
+            transform: rotate(-20deg);
+        }
+
+        .eyer {
+            top: 5px;
+            left: 80px;
+
+            transform: rotate(20deg);
+        }
+
+
+        /* ================================
+           EYEBALLS
+        ================================= */
+
+        .eyeball1,
+        .eyeball2 {
+            height: 10px;
+            width: 10px;
+
+            background-color: white;
+
+            border-radius: 50%;
+
+            position: relative;
+
+            transition: 1s all;
+        }
+
+        .eyeball1 {
+            left: 10px;
+            top: 10px;
+        }
+
+        .eyeball2 {
+            left: 10px;
+            top: 10px;
+        }
+
+
+        /* ================================
+           BLUSH
+        ================================= */
+
+        .blshl,
+        .blshr {
+            background-color: #ff9999;
+
+            height: 16px;
+            width: 22px;
+
+            border-radius: 50%;
+
+            position: absolute;
+
+            opacity: 0.8;
+        }
+
+        .blshl {
+            transform: rotate(25deg);
+
+            top: 64px;
+            left: 17px;
+        }
+
+        .blshr {
+            transform: rotate(-25deg);
+
+            top: 64px;
+            left: 95px;
+        }
+
+
+        /* ================================
+           NOSE
+        ================================= */
+
+        .nose {
+            height: 17px;
+            width: 17px;
+
+            background-color: #4d4449;
+
+            border-radius: 20px 0 4px;
+
+            transform: rotate(45deg);
+
+            position: absolute;
+
+            top: 65px;
+            left: 60px;
+        }
+
+        .line {
+            background-color: #4d4449;
+
+            height: 10px;
+            width: 2px;
+
+            position: absolute;
+
+            transform: rotate(-45deg);
+
+            left: 18.5px;
+            top: 15px;
+        }
+
+
+        /* ================================
+           MOUTH
+        ================================= */
+
+        .m,
+        .mm {
+            background-color: #4d4449;
+
+            height: 8px;
+            width: 15px;
+
+            border-radius: 0 0 8px 8px;
+
+            position: absolute;
+        }
+
+        .m {
+            top: 88px;
+            left: 53px;
+        }
+
+        .mm {
+            top: 88px;
+            left: 68.5px;
+        }
+
+        .m1 {
+            height: 6px;
+            width: 13px;
+
+            background-color: white;
+
+            border-radius: 0 0 10px 10px;
+
+            position: relative;
+
+            left: 1px;
+            bottom: 1px;
+        }
+
+
+        /* ================================
+           PANDA HANDS
+        ================================= */
+
+        .handl,
+        .handr {
+            background-color: #4d4449;
+
+            height: 45px;
+            width: 35px;
+
+            border-radius: 10px 10px 30px 30px;
+
+            position: absolute;
+
+            z-index: 5;
+
+            transition: 1s all;
+        }
+
+        .handl {
+            top: 175px;
+            left: 50px;
+        }
+
+        .handr {
+            top: 175px;
+            left: 275px;
+        }
+
+
+        /* ================================
+           PAWS
+        ================================= */
+
+        .pawl,
+        .pawr {
+            background-color: #4d4449;
+
+            height: 50px;
+            width: 50px;
+
+            border-radius: 40px 40px 20px 20px;
+
+            position: absolute;
+
+            z-index: 5;
+
+            top: 390px;
+        }
+
+        .pawl {
+            left: 75px;
+        }
+
+        .pawr {
+            right: 75px;
+        }
+
+
+        .p1 {
+            background-color: white;
+
+            height: 25px;
+            width: 30px;
+
+            position: relative;
+
+            top: 21px;
+            left: 10px;
+
+            border-radius: 25px 25px 10px 10px;
+        }
+
+
+        .p2,
+        .p3,
+        .p4 {
+            background-color: white;
+
+            height: 10px;
+            width: 10px;
+
+            border-radius: 50%;
+
+            position: absolute;
+        }
+
+        .p2 {
+            top: -13px;
+            left: 9.5px;
+        }
+
+        .p3 {
+            top: -17px;
+            right: 2.5px;
+        }
+
+        .p4 {
+            top: -27px;
+            left: 22px;
+        }
+
+
+        /* ================================
+           RESPONSIVE
+        ================================= */
+
+        @media (max-width: 450px) {
+
+            .container {
+                transform: scale(0.9);
+            }
+        }
+
+        @media (max-height: 600px) {
+
+            .container {
+                transform: scale(0.8);
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =================================
+         MAIN CENTERED CONTAINER
+    ================================== -->
+
+    <div class="container">
+
+        <!-- LOGIN FORM -->
+
+        <div class="login">
+
+            <i class="fa fa-user" aria-hidden="true"></i>
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Username"
+            >
+
+            <br><br>
+
+            <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Password"
+            >
+
+            <br><br>
+
+            <button type="button" id="loginBtn">
+                Login
+            </button>
+
+        </div>
+
+
+        <!-- =================================
+             PANDA
+        ================================== -->
+
+        <div class="panda">
+
+            <div class="earl"></div>
+            <div class="earr"></div>
+
+            <div class="face">
+
+                <div class="blshl"></div>
+                <div class="blshr"></div>
+
+                <div class="eyel">
+                    <div class="eyeball1"></div>
+                </div>
+
+                <div class="eyer">
+                    <div class="eyeball2"></div>
+                </div>
+
+                <div class="nose">
+                    <div class="line"></div>
+                </div>
+
+                <div class="mouth">
+
+                    <div class="m">
+                        <div class="m1"></div>
+                    </div>
+
+                    <div class="mm">
+                        <div class="m1"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================
+             PAWS
+        ================================== -->
+
+        <div class="pawl">
+
+            <div class="p1">
+                <div class="p2"></div>
+                <div class="p3"></div>
+                <div class="p4"></div>
+            </div>
+
+        </div>
+
+
+        <div class="pawr">
+
+            <div class="p1">
+                <div class="p2"></div>
+                <div class="p3"></div>
+                <div class="p4"></div>
+            </div>
+
+        </div>
+
+
+        <!-- =================================
+             HANDS
+        ================================== -->
+
+        <div class="handl"></div>
+        <div class="handr"></div>
+
+    </div>
+
+
+    <!-- =================================
+         JAVASCRIPT / JQUERY
+    ================================== -->
+
+    <script>
+
+        $(document).ready(function () {
+
+            /* =========================
+               USERNAME FOCUS
+            ========================== */
+
+            $("#username").focus(function () {
+
+                $(".handl").css({
+                    transform: "rotate(0deg)",
+                    top: "175px",
+                    left: "50px",
+                    height: "45px",
+                    width: "35px"
+                });
+
+                $(".handr").css({
+                    transform: "rotate(0deg)",
+                    top: "175px",
+                    left: "275px",
+                    height: "45px",
+                    width: "35px"
+                });
+
+                $(".eyeball1").css({
+                    top: "20px",
+                    left: "13px"
+                });
+
+                $(".eyeball2").css({
+                    top: "20px",
+                    left: "8px"
+                });
+
+            });
+
+
+            /* =========================
+               PASSWORD FOCUS
+            ========================== */
+
+            $("#password").focus(function () {
+
+                $(".eyeball1").css({
+                    top: "10px",
+                    left: "10px"
+                });
+
+                $(".eyeball2").css({
+                    top: "10px",
+                    left: "10px"
+                });
+
+                $(".handl").css({
+                    transform: "rotate(-150deg)",
+                    top: "150px",
+                    left: "105px",
+                    height: "90px",
+                    width: "40px"
+                });
+
+                $(".handr").css({
+                    transform: "rotate(150deg)",
+                    top: "150px",
+                    left: "215px",
+                    height: "90px",
+                    width: "40px"
+                });
+
+            });
+
+
+            /* =========================
+               LOGIN BUTTON
+            ========================== */
+
+            $("#loginBtn").click(function () {
+
+                let username = $("#username").val();
+                let password = $("#password").val();
+
+                if (username === "" || password === "") {
+
+                    alert("Please enter username and password.");
+
+                } else {
+
+                    alert("Login successful! Welcome " + username);
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
